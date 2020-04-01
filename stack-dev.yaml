@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  features:
+    build:
+      context: ./features
+    links:
+      - db
+      - reverse-proxy
+    environment:
+      API_BASEURL: http://reverse-proxy:80
+      DB_DSN: pgsql://paidetodos:sassenhora@db:5432/dcare
+
+  reverse-proxy:
+    ports:
+    - "8080:80"
+
+  api:
+    links:
+      - db
+    environment:
+      DB_DSN: pgsql://paidetodos:sassenhora@db:5432/dcare
+
+  db:
+    image: postgres:12-alpine
+    ports:
+    - "8081:5432"
+    environment:
+      POSTGRES_DB: dcare
+      POSTGRES_USER: paidetodos
+      POSTGRES_PASSWORD: sassenhora

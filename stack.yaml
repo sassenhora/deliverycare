@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  reverse-proxy:
+    image: sassenhora/deliverycare/reverse-proxy
+    build:
+      context: services/reverse-proxy/
+    links:
+      - api
+
+  api:
+    image: sassenhora/deliverycare/api
+    build:
+      context: services/api/
+      args:
+        DEBUG: ${DEBUG}
+    environment:
+      DEBUG: ${DEBUG}
+      VERSION: ${VERSION}
+      INSTANCE: ${INSTANCE}

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+wait-for $API_BASEURL -- \
+    echo 'Api is ready'
+
+echo "Running features with command '$@'"
+eval $@
+

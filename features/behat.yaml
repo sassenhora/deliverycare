@@ -1,0 +1,9 @@
+default:
+  suites:
+    api:
+      services: "Features\\DependencyLoader::bootstrap"
+      autowire: true
+
+      paths:
+        - '%paths.base%/suites/api'
+      contexts: []

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+wait-for $DB_DSN -- \
+    echo 'Database is ready'
+
+echo "Starting $APP_NAME with: $@"
+eval $@
+
